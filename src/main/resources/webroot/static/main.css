@@ -1,7 +1,52 @@
+@import url(http://fonts.googleapis.com/css?family=Helvetica+Neue);
 html {
+    -webkit-font-smoothing: antialiased;
     text-align: center;
 }
 
 body {
-	font-family: sans-serif;
+   font-family: 'Helvetica Neue';
+   font-weight: 300;
+   height: 100%;
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+.wrapper {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#formTable
+{
+margin: 0 auto;
+}
+
+#formTable tr
+{
+    text-align:center;
+}
+
+#formTable label {
+  text-align: right;
+  display: block;
+}
+
+#formTable input {
+
+}
+
+.button {
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 27px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
 }

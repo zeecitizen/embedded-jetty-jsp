@@ -5,18 +5,27 @@
 </head>
 
 <body>
+<div class = "main"><div class = "wrapper">
   <h1>Login</h1>
   <p>
-    <form action="/test/loginProcess.jsp" method = "GET" name = "LoginForm">
-        <label>User Name: </label>
-        <input type="text" name = "name"><br>
+<table height="100%" width="30%" border="0" id="formTable">
 
-        <label>Password: </label>
-        <input type="password" name = "passwd"><br>
-        <input type = "submit" value = "Login"><br>
-        <p>Don't have a username? <a href = "register.jsp">Register Now </a></p>
+    <form action="/test/loginProcess.jsp" method = "GET" name = "LoginForm">
+        <tr>
+        <td><label>User Name: </label></td>
+        <td><input type="text" name = "name"></td>
+        </tr>
+
+        <tr>
+        <td><label>Password: </label></td>
+        <td><input type="password" name = "passwd"></td></td>
+        <tr><td colspan="2"><input type = "submit" value = "Login"  class="button"></td></tr>
+
+        <tr><td colspan="2"><p>Don't have a username? <a href = "register.jsp">Register Now </a></p></td></tr>
 
     </form>
+           </table>
   </p>
+  </div></div>
 </body>
 </html>

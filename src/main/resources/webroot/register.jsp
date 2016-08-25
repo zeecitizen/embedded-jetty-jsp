@@ -5,18 +5,30 @@
 </head>
 
 <body>
+<div class = "main"><div class = "wrapper">
   <h1>Registration</h1>
   <p>
   Please enter details to register.
+  <table height="100%" width="30%" border="0" id="formTable">
     <form action="/test/registerProcess.jsp" method = "GET" name = "registerForm">
-        <label>New User Name: </label>
-        <input type="text" name = "name"><br>
 
-        <label>Choose a password: </label>
-        <input type="password" name = "passwd"><br>
-        <input type = "submit" value = "Register">
+        <tr>
+        <td><label>New User Name: </label> </td>
+        <td><input type="text" name = "name"></td>
+        </tr>
+
+        <tr>
+        <td><label>Choose a password: </label> </td>
+        <td><input type="password" name = "passwd"></td>
+        </tr>
+
+        <tr>
+        <td colspan="2"><input type = "submit"   class="button" value = "Register"> </td>
+        </tr>
 
     </form>
+    </table>
   </p>
+  </div></div>
 </body>
 </html>
