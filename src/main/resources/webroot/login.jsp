@@ -27,7 +27,9 @@
 
                     <tr>
                         <td colspan="2">
-        <p>Don't have a username? <a href="register.jsp">Register Now </a></p></td></tr>
+                        <p>Don't have a username? <a href="register.jsp">Register Now </a></p>
+                        </td>
+                    </tr>
 
         </form>
         </table>

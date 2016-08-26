@@ -2,6 +2,8 @@
 
 <head>
     <%@ page import="java.util.Enumeration, org.apache.commons.lang3.StringEscapeUtils" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <title>Login</title>
     <link href="../static/main.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
@@ -11,18 +13,13 @@
 
 <%
     String userName = request.getParameter("name");
-    userName = StringEscapeUtils.escapeJava(userName);
-    userName = StringEscapeUtils.escapeHtml4(userName);
-
     String password = request.getParameter("passwd");
-    password = StringEscapeUtils.escapeJava(password);
-    password = StringEscapeUtils.escapeHtml4(password);
+    pageContext.setAttribute("userNameCtx", userName);
 
     if (userName.equals(session.getAttribute("name")) && password.equals(session.getAttribute("passwd"))) { %>
-    <h2>Welcome <%= userName %>
-    </h2>
+    <p>Welcome <c:out value="${fn:escapeXml(userNameCtx)}" /></p>
 <% } else { %>
-    <h2>Wrong User Name or Password. Please try again! <a href="../login.jsp">Back</a></h2>
+    <p>Wrong User Name or Password. Please try again! <a href="../login.jsp">Back</a></p>
 <% } %>
 
 </body>
