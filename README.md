@@ -1,4 +1,6 @@
-Example: Embedded Jetty w/ JSP Support 
+Example: Embedded Jetty w/ JSP Support - Simple Login and Registration page
+
+This repository will be updated frequently for a project in the week 26/8/2016
 ======================================
 
 This is a maven project, to build it:
