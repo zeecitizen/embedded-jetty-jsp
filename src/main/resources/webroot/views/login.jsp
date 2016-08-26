@@ -11,7 +11,7 @@
         <p>
             <table height="100%" width="30%" border="0" id="formTable">
 
-                <form action="/test/loginProcess.jsp" method="GET" name="LoginForm">
+                <form action="../controller/loginProcess.jsp" method="GET" name="LoginForm">
                     <tr>
                         <td><label>User Name: </label></td>
                         <td><input type="text" name="name"></td>

@@ -166,8 +166,9 @@ public class Main
         // Add Application Servlets
         context.addServlet(DateServlet.class, "/date/");
 
-        context.addServlet(exampleJspFileMappedServletHolder(), "/test/foo/");
+        //context.addServlet(exampleJspFileMappedServletHolder(), "/views");
         context.addServlet(defaultServletHolder(baseUri), "/");
+
         return context;
     }
 
@@ -217,8 +218,8 @@ public class Main
     private ServletHolder exampleJspFileMappedServletHolder()
     {
         ServletHolder holderAltMapping = new ServletHolder();
-        holderAltMapping.setName("foo.jsp");
-        holderAltMapping.setForcedPath("/test/foo/foo.jsp");
+        holderAltMapping.setName("index.jsp");
+        holderAltMapping.setForcedPath("/views/index.jsp");
         return holderAltMapping;
     }
 

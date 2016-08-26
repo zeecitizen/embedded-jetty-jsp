@@ -11,7 +11,7 @@
         <p>
             Please enter details to register.
         <table height="100%" width="30%" border="0" id="formTable">
-            <form action="/test/registerProcess.jsp" method="GET" name="registerForm">
+            <form action="../controller/registerProcess.jsp" method="GET" name="registerForm">
 
                 <tr>
                     <td><label>New User Name: </label></td>

@@ -30,7 +30,7 @@ public class JstlTest {
 
     @Test
     public void canServeJspWithTaglib() throws Exception {
-        assertThat(resourceWithUrl("http://localhost:8080/test/jstl.jsp"), containsString("10"));
+        assertThat(resourceWithUrl("http://localhost:8080/controller/jstl.jsp"), containsString("10"));
     }
 
     public String resourceWithUrl(String uri) throws Exception {

@@ -1,11 +1,10 @@
 <html>
 
 <head>
-    <%@ page import="java.util.Enumeration, org.apache.commons.lang3.StringEscapeUtils" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <title>Login</title>
-    <link href="../static/main.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="../views/static/main.css" media="all" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -18,8 +17,11 @@
 
     if (userName.equals(session.getAttribute("name")) && password.equals(session.getAttribute("passwd"))) { %>
     <p>Welcome <c:out value="${fn:escapeXml(userNameCtx)}" /></p>
-<% } else { %>
-    <p>Wrong User Name or Password. Please try again! <a href="../login.jsp">Back</a></p>
+    <p>Click <a href="../views/membersArea.jsp">here</a> to go to Members Area!</p>
+<%
+    session.setAttribute("is_login","1");
+    } else { %>
+    <p>Wrong User Name or Password. Please try again! <a href="../views/login.jsp">Back</a></p>
 <% } %>
 
 </body>
