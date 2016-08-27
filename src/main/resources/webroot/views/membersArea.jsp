@@ -16,7 +16,6 @@
     <div class="wrapper">
         <h1>Members Area</h1>
         <p>
-            Tinglabs was established in 2010.
         </p>
     </div>
 </div>

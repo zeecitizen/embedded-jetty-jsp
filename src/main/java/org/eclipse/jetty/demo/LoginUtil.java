@@ -58,8 +58,7 @@ public class LoginUtil {
         }
     }
 
-    public boolean userExists(String userName)
-    {
+    public boolean userExists(String userName) {
         return users.containsKey(userName);
     }
 
