@@ -1,3 +1,4 @@
+<%@ page import="org.eclipse.jetty.demo.LoginUtil" %>
 <html>
 
 <head>
@@ -15,15 +16,19 @@
     String userName = request.getParameter("name");
     String password = request.getParameter("passwd");
 
-    session.setAttribute("name", userName);
-    session.setAttribute("passwd", password);
+    LoginUtil login = LoginUtil.getInstance();
+
+    login.addUser(userName, password);
     pageContext.setAttribute("userNameCtx", userName);
 
-    if (session.getAttribute("name") == null || session.getAttribute("passwd") == null) { %>
+    if (login.userExists(userName)) { %>
+    <p> User already Exists! Please try a different user name. Please go <a href="../views/register.jsp">back</a> and try again </p>
+    <% } else if (!login.validateUser(userName, password)) { %>
     <p> Error while registering new user! Please go <a href="../views/register.jsp">back</a> and try again </p>
-<% } else {%>
-    <p> Hi <c:out value="${fn:escapeXml(userNameCtx)}" />. Registration successful! Click <a href="../views/login.jsp">here</a> to Login </p>
-<% } %>
+    <% } else {%>
+    <p> Hi <c:out value="${fn:escapeXml(userNameCtx)}"/>. Registration successful! Click <a
+            href="../views/login.jsp">here</a> to Login </p>
+    <% } %>
 
 </body>
 </html>

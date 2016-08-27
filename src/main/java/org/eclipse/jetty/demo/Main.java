@@ -51,13 +51,11 @@ import com.acme.DateServlet;
  * Example of using JSP's with embedded jetty and not requiring
  * all of the overhead of a WebAppContext
  */
-public class Main
-{
+public class Main {
     // Resource path pointing to where the WEBROOT is
     private static final String WEBROOT_INDEX = "/webroot/";
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         int port = 8080;
         LoggingUtil.config();
         Log.setLog(new JavaUtilLog());
@@ -73,18 +71,15 @@ public class Main
     private Server server;
     private URI serverURI;
 
-    public Main(int port)
-    {
+    public Main(int port) {
         this.port = port;
     }
 
-    public URI getServerURI()
-    {
+    public URI getServerURI() {
         return serverURI;
     }
 
-    public void start() throws Exception
-    {
+    public void start() throws Exception {
         server = new Server();
         ServerConnector connector = connector();
         server.addConnector(connector);
@@ -102,25 +97,21 @@ public class Main
         server.start();
 
         // Show server state
-        if (LOG.isLoggable(Level.FINE))
-        {
+        if (LOG.isLoggable(Level.FINE)) {
             LOG.fine(server.dump());
         }
         this.serverURI = getServerUri(connector);
     }
 
-    private ServerConnector connector()
-    {
+    private ServerConnector connector() {
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(port);
         return connector;
     }
 
-    private URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException
-    {
+    private URI getWebRootResourceUri() throws FileNotFoundException, URISyntaxException {
         URL indexUri = this.getClass().getResource(WEBROOT_INDEX);
-        if (indexUri == null)
-        {
+        if (indexUri == null) {
             throw new FileNotFoundException("Unable to find resource " + WEBROOT_INDEX);
         }
         // Points to wherever /webroot/ (the resource) is
@@ -130,15 +121,12 @@ public class Main
     /**
      * Establish Scratch directory for the servlet context (used by JSP compilation)
      */
-    private File getScratchDir() throws IOException
-    {
+    private File getScratchDir() throws IOException {
         File tempDir = new File(System.getProperty("java.io.tmpdir"));
         File scratchDir = new File(tempDir.toString(), "embedded-jetty-jsp");
 
-        if (!scratchDir.exists())
-        {
-            if (!scratchDir.mkdirs())
-            {
+        if (!scratchDir.exists()) {
+            if (!scratchDir.mkdirs()) {
                 throw new IOException("Unable to create scratch directory: " + scratchDir);
             }
         }
@@ -149,13 +137,12 @@ public class Main
      * Setup the basic application "context" for this application at "/"
      * This is also known as the handler tree (in jetty speak)
      */
-    private WebAppContext getWebAppContext(URI baseUri, File scratchDir)
-    {
+    private WebAppContext getWebAppContext(URI baseUri, File scratchDir) {
         WebAppContext context = new WebAppContext();
         context.setContextPath("/");
         context.setAttribute("javax.servlet.context.tempdir", scratchDir);
         context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-          ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/.*taglibs.*\\.jar$");
+                ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/.*taglibs.*\\.jar$");
         context.setResourceBase(baseUri.toASCIIString());
         context.setAttribute("org.eclipse.jetty.containerInitializers", jspInitializers());
         context.setAttribute(InstanceManager.class.getName(), new SimpleInstanceManager());
@@ -175,8 +162,7 @@ public class Main
     /**
      * Ensure the jsp engine is initialized correctly
      */
-    private List<ContainerInitializer> jspInitializers()
-    {
+    private List<ContainerInitializer> jspInitializers() {
         JettyJasperInitializer sci = new JettyJasperInitializer();
         ContainerInitializer initializer = new ContainerInitializer(sci, null);
         List<ContainerInitializer> initializers = new ArrayList<ContainerInitializer>();
@@ -190,8 +176,7 @@ public class Main
      * embedded System classloader in a way that makes it suitable
      * for JSP to use
      */
-    private ClassLoader getUrlClassLoader()
-    {
+    private ClassLoader getUrlClassLoader() {
         ClassLoader jspClassLoader = new URLClassLoader(new URL[0], this.getClass().getClassLoader());
         return jspClassLoader;
     }
@@ -199,8 +184,7 @@ public class Main
     /**
      * Create JSP Servlet (must be named "jsp")
      */
-    private ServletHolder jspServletHolder()
-    {
+    private ServletHolder jspServletHolder() {
         ServletHolder holderJsp = new ServletHolder("jsp", JettyJspServlet.class);
         holderJsp.setInitOrder(0);
         holderJsp.setInitParameter("logVerbosityLevel", "DEBUG");
@@ -215,8 +199,7 @@ public class Main
     /**
      * Create Example of mapping jsp to path spec
      */
-    private ServletHolder exampleJspFileMappedServletHolder()
-    {
+    private ServletHolder exampleJspFileMappedServletHolder() {
         ServletHolder holderAltMapping = new ServletHolder();
         holderAltMapping.setName("index.jsp");
         holderAltMapping.setForcedPath("/views/index.jsp");
@@ -226,8 +209,7 @@ public class Main
     /**
      * Create Default Servlet (must be named "default")
      */
-    private ServletHolder defaultServletHolder(URI baseUri)
-    {
+    private ServletHolder defaultServletHolder(URI baseUri) {
         ServletHolder holderDefault = new ServletHolder("default", DefaultServlet.class);
         LOG.info("Base URI: " + baseUri);
         holderDefault.setInitParameter("resourceBase", baseUri.toASCIIString());
@@ -238,19 +220,15 @@ public class Main
     /**
      * Establish the Server URI
      */
-    private URI getServerUri(ServerConnector connector) throws URISyntaxException
-    {
+    private URI getServerUri(ServerConnector connector) throws URISyntaxException {
         String scheme = "http";
-        for (ConnectionFactory connectFactory : connector.getConnectionFactories())
-        {
-            if (connectFactory.getProtocol().equals("SSL-http"))
-            {
+        for (ConnectionFactory connectFactory : connector.getConnectionFactories()) {
+            if (connectFactory.getProtocol().equals("SSL-http")) {
                 scheme = "https";
             }
         }
         String host = connector.getHost();
-        if (host == null)
-        {
+        if (host == null) {
             host = "localhost";
         }
         int port = connector.getLocalPort();
@@ -259,8 +237,7 @@ public class Main
         return serverURI;
     }
 
-    public void stop() throws Exception
-    {
+    public void stop() throws Exception {
         server.stop();
     }
 
@@ -268,10 +245,10 @@ public class Main
      * Cause server to keep running until it receives a Interrupt.
      * <p>
      * Interrupt Signal, or SIGINT (Unix Signal), is typically seen as a result of a kill -TERM {pid} or Ctrl+C
+     *
      * @throws InterruptedException if interrupted
      */
-    public void waitForInterrupt() throws InterruptedException
-    {
+    public void waitForInterrupt() throws InterruptedException {
         server.join();
     }
 }

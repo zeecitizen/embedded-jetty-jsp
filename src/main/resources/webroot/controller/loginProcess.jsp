@@ -1,3 +1,4 @@
+<%@ page import="org.eclipse.jetty.demo.LoginUtil" %>
 <html>
 
 <head>
@@ -11,18 +12,21 @@
 <h1>Login</h1>
 
 <%
+
     String userName = request.getParameter("name");
     String password = request.getParameter("passwd");
     pageContext.setAttribute("userNameCtx", userName);
 
-    if (userName.equals(session.getAttribute("name")) && password.equals(session.getAttribute("passwd"))) { %>
-    <p>Welcome <c:out value="${fn:escapeXml(userNameCtx)}" /></p>
+    LoginUtil login = LoginUtil.getInstance();
+
+    if (login.validateUser(userName, password)) { %>
+    <p>Welcome <c:out value="${fn:escapeXml(userNameCtx)}"/></p>
     <p>Click <a href="../views/membersArea.jsp">here</a> to go to Members Area!</p>
-<%
-    session.setAttribute("is_login","1");
+    <%
+        session.setAttribute("is_login", "1");
     } else { %>
     <p>Wrong User Name or Password. Please try again! <a href="../views/login.jsp">Back</a></p>
-<% } %>
+    <% } %>
 
 </body>
 </html>

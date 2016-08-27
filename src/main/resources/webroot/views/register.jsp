@@ -29,6 +29,7 @@
 
             </form>
         </table>
+        Already Registered? Click <a href="login.jsp">here</a> to Login
         </p>
     </div>
 </div>
