@@ -16,6 +16,7 @@
     <div class="wrapper">
         <h1>Members Area</h1>
         <p>
+            Tinglabs was established in 2010.. Meet the founder of Tinglabs <a href="resume/home.jsp">here</a>
         </p>
     </div>
 </div>

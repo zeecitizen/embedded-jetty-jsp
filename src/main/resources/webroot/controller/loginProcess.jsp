@@ -9,24 +9,27 @@
 </head>
 
 <body>
-<h1>Login</h1>
 
-<%
+<div class="main">
+    <div class="wrapper">
 
-    String userName = request.getParameter("name");
-    String password = request.getParameter("passwd");
-    pageContext.setAttribute("userNameCtx", userName);
+        <h1>Login</h1>
+        <%
+        String userName = request.getParameter("name");
+        String password = request.getParameter("passwd");
+        pageContext.setAttribute("userNameCtx", userName);
 
-    LoginUtil login = LoginUtil.getInstance();
+        LoginUtil login = LoginUtil.getInstance();
 
-    if (login.validateUser(userName, password)) { %>
-    <p>Welcome <c:out value="${fn:escapeXml(userNameCtx)}"/></p>
-    <p>Click <a href="../views/membersArea.jsp">here</a> to go to Members Area!</p>
-    <%
-        session.setAttribute("is_login", "1");
-    } else { %>
-    <p>Wrong User Name or Password. Please try again! <a href="../views/login.jsp">Back</a></p>
-    <% } %>
+        if (login.validateUser(userName, password)) {
+            session.setAttribute("is_login", "1"); %>
+            <c:redirect url="../views/membersArea.jsp"/>
+        <%
+        } else { %>
+        <p>Wrong User Name or Password. Please try again! <a href="../views/login.jsp">Back</a></p>
+        <% } %>
 
+    </div>
+</div>
 </body>
 </html>
