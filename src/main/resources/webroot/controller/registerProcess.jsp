@@ -14,22 +14,27 @@
 
         <h1>Register</h1>
         <%
-        String userName = request.getParameter("name");
-        String password = request.getParameter("passwd");
+            String userName = request.getParameter("name");
+            String password = request.getParameter("passwd");
 
-        LoginUtil login = LoginUtil.getInstance();
+            LoginUtil login = LoginUtil.getInstance();
+            pageContext.setAttribute("userNameCtx", userName);
 
-        login.addUser(userName, password);
-        pageContext.setAttribute("userNameCtx", userName);
+            if (userName != null && !userName.isEmpty() && password != null && !password.isEmpty()) {
+                    if (login.userExists(userName)) { %>
+                            <p> User already Exists! Please try a different user name. Please go <a href="../views/register.jsp">back</a> and try again </p>
+                    <% } else {
+                        login.addUser(userName, password);
 
-        if (login.userExists(userName)) { %>
-        <p> User already Exists! Please try a different user name. Please go <a href="../views/register.jsp">back</a> and try again </p>
-        <% } else if (!login.validateUser(userName, password)) { %>
-        <p> Error while registering new user! Please go <a href="../views/register.jsp">back</a> and try again </p>
-        <% } else {%>
-        <p> Hi <c:out value="${fn:escapeXml(userNameCtx)}"/>. Registration successful! Click <a
-                href="../views/login.jsp">here</a> to Login </p>
-        <% } %>
+                        if (!login.validateUser(userName, password)) { %>
+                            <p> Error while registering new user! Please go <a href="../views/register.jsp">back</a> and try again! </p>
+                        <% } else {%>
+                            <p> Hi <c:out value="${fn:escapeXml(userNameCtx)}"/>. Registration successful! Click <a href="../views/login.jsp">here</a> to Login </p>
+                        <% }
+                    }
+            } else { %>
+                <p> Empty username or password! Please fill in the entries properly by going <a href="../views/register.jsp">back</a></p>
+         <% } %>
 
     </div>
 </div>

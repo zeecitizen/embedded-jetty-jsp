@@ -15,19 +15,18 @@
 
         <h1>Login</h1>
         <%
-        String userName = request.getParameter("name");
-        String password = request.getParameter("passwd");
-        pageContext.setAttribute("userNameCtx", userName);
+            String userName = request.getParameter("name");
+            String password = request.getParameter("passwd");
+            pageContext.setAttribute("userNameCtx", userName);
 
-        LoginUtil login = LoginUtil.getInstance();
+            LoginUtil login = LoginUtil.getInstance();
 
-        if (login.validateUser(userName, password)) {
-            session.setAttribute("is_login", "1"); %>
-            <c:redirect url="../views/membersArea.jsp"/>
-        <%
+        if (userName != null && !userName.isEmpty() && password != null && !password.isEmpty())
+        {
         } else { %>
-        <p>Wrong User Name or Password. Please try again! <a href="../views/login.jsp">Back</a></p>
+            <p> Empty username or password! Please fill in the entries properly by going <a href="../views/login.jsp">back</a></p>
         <% } %>
+
 
     </div>
 </div>
