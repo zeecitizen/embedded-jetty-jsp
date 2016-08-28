@@ -1,7 +1,6 @@
 <%
-    if (null == session || !session.getAttribute("is_login").equals("1")) {
-        response.sendRedirect("login");
-        return;
+    if (session == null || session.getAttribute("is_login") == null || session.getAttribute("is_login").equals("1")) {
+        response.sendRedirect("login.jsp");
     }
 %>
 

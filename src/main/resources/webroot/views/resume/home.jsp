@@ -1,3 +1,9 @@
+<%
+    if (session == null || session.getAttribute("is_login") == null || session.getAttribute("is_login").equals("1")) {
+        response.sendRedirect("../login.jsp");
+    }
+%>
+
 <!doctype html>
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
