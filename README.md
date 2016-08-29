@@ -11,7 +11,7 @@ IDENTIFIED PROBLEMS AND THEIR SOLUTIONS:
 
 Problem: Only one user could be registered because we were storing only a single variable in the session.
 
-Solution: Decided to use a Hashmap to register multiple-users. Wrote LoginUtil and HashUtil classes to assist in this. The LoginUtil class follows the singleton pattern exposing a getInstance() method.
+Solution: Decided to use a Hashtable to store multiple-users. Wrote LoginUtil and HashUtil classes to assist in this. The LoginUtil class follows the singleton pattern exposing a getInstance() method. The HashUtil class uses import javax.crypto.spec.PBEKeySpec to hash the password with a salt. We use the SerializeUtil class written by me to serialize and store the Hashtable to a file. 
 
 ----------------
 
@@ -57,6 +57,13 @@ Solution: Upgraded Intellij to Ultimate edition instead of community edition.
 Problem: The use of scriptlets (<% %>) in JSP is discouraged since the birth of taglibs (like JSTL) and EL (${}). 
 
 Solution: For the purpose of this task we stick to Scriptlets to reduce complexity of demonstration.
+
+----------------
+
+Problem: Redirection upon trying to access a protected page without logging in was not working.
+
+Solution: Upon not logged in state if we tried to access a members-only page. The system was giving an exception. This was because the
+session.getAttribute("is_login") returned null when session variable was not set and we were applying .equals() method on that inside If condition. Now we have used OR statements to check first using 'short-circuiting' if the session.getAttribute() is not returning null only then it goes to checking the next condition by calling the .equals() function on it.
 
 ----------------
 
