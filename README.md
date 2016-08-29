@@ -1,9 +1,9 @@
 Example: Embedded Jetty w/ JSP Support - 
 
-Simple Login and Registration page with Hashed salted password stored to file.  
+Simple Login and Registration - JSP 
 ======================================
 
-This project also contains my resume built using Bootstrap. 
+The project shows simple JSP Scriptlets and JSTL with Java and CSS to build a login system. The passwords are stored after hashing with salt. They are stored in a HashTable which is serialized and written to a file to replace the need for a database. This project also contains my resume built using Bootstrap. 
 
 IDENTIFIED PROBLEMS AND THEIR SOLUTIONS:
 ======================================
