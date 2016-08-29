@@ -3,9 +3,56 @@ Example: Embedded Jetty w/ JSP Support -
 Simple Login and Registration page with Hashed salted password stored to file.  
 ======================================
 
-This project also contains my resume built using Bootstrap. To build:
+This project also contains my resume built using Bootstrap. 
+
+IDENTIFIED PROBLEMS AND THEIR SOLUTIONS:
+======================================
+Problem: Input sanitization was not done properly.
+Acquired Information: Read about it. Turns out, in JSP, we don't need to escape characters in the Java (Servlet) code as they are harmless over there. We need to escape before re-displaying the input values entered by user. 
+
+Solution 1: For displaying user-input this can mean using JSTL  <c:out> tag or fn:escapeXml(). 
+
+Solution 2: To prevent SQL injection we can use a Java PreparedStatement object for sending SQL statements to the database.
+
+----------------
+
+Problem: While using JSTL to escapeXML, I came to know that JSTL and Scriptlets store variables in different contexts. 
+Solution: Used pageContext.setAttribute("value", value); and getAttribute commands to access Scriptlet variables in JSTL tags.
+
+----------------
+
+Problem: The font Helvetica Neue was not working. 
+Solution: Imported the font and wrote CSS style for it to be included as font for body
+
+----------------
+
+Problem: Intellij was not showing code style formatting options for JSP
+Solution: Upgraded Intellij to Ultimate edition instead of community edition.
+
+----------------
+
+Problem: The use of scriptlets (<% %>) in JSP is discouraged since the birth of taglibs (like JSTL) and EL (${}). 
+Solution: For the purpose of this task we stick to Scriptlets to reduce complexity of demonstration.
+
+----------------
+
+Problem: Only one user could be registered because we were storing only a single variable in the session.
+Solution: Decided to use a Hashmap to register multiple-users. Wrote LoginUtil and HashUtil classes to assist in this. The LoginUtil class follows the singleton pattern exposing a getInstance() method.
+
+----------------
+
+Problem: Unsafe to store passwords. 
+Solution: Decided to hash the user's password together with a salt and to validate a password we compare hashed input against a previously recorded hash.
+
+----------------
+
+Problem: The scope of a hashtable/hashmap is the life of the program itself. This causes the registered users to be lost when the application is terminated.
+Solution: We serialize objects and store them by writing to a file. This is not very secure but for the scope of this program we can consider these solutions.
+
+----------------
 
 This is a maven project, to build it:
+======================================
 
     $ mvn clean package
 
