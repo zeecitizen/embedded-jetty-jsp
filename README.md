@@ -1,7 +1,9 @@
-Example: Embedded Jetty w/ JSP Support - Simple Login and Registration page
+Example: Embedded Jetty w/ JSP Support - 
 
-This repository will be updated frequently for a project in the week 26/8/2016
+Simple Login and Registration page with Hashed salted password stored to file.  
 ======================================
+
+This project also contains my resume built using Bootstrap. To build:
 
 This is a maven project, to build it:
 
